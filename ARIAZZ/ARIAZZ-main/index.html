@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariazz - Tienda de Ropa Personalizadas</title>
+    <link rel="icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+     <!-- Sección del barra de inicio  -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="presave.html">PRE SAVE</a></li>
+                    <li><a href="#">Personalización</a></li>
+                </ul>
+
+            </nav> 
+            <div class="icons">
+                <a href="cuenta.html"><i class="fas fa-user"></i> Cuenta</a>
+                <a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Sección del banner con video -->
+    <section class="main-banner">
+        <video autoplay muted loop id="videoBanner">
+            <source src="img/video.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <div class="banner-text">
+            <h2>ALTER EGO MERCH</h2>
+            <p>Adquiere los nuevos productos del cantante NSQK</p>
+        </div>
+    </div>
+
+    </section>
+
+   
+    <!-- Script para ocultar el banner con el scroll -->
+    <script>
+        window.addEventListener("scroll", function () {
+            const banner = document.querySelector(".main-banner");
+            if (window.scrollY > 100) {
+                banner.classList.add("hidden");
+            } else {
+                banner.classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - Ariazz</title>
+    <link rel="stylesheet" href="estiloc.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+ /* Estilo básico para el body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414; /* Fondo oscuro */
+    color: #fff; /* Texto blanco para contraste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Contenedor del Dashboard */
+.admin-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Caja de Dashboard individual */
+.dashboard-box {
+    background-color: #1e1e1e; /* Fondo oscuro de las cajas */
+    padding: 20px;
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 280px; /* Tamaño ajustado */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* Títulos dentro de las cajas */
+.dashboard-box h2 {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* Tablas de ventas y usuarios */
+.sales-table, .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Encabezado de las tablas */
+.sales-table th, .user-table th {
+    background-color: #333; /* Fondo oscuro */
+    color: #fff;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Celdas de las tablas */
+.sales-table td, .user-table td {
+    padding: 12px 15px;
+    border: 1px solid #444; /* Borde sutil entre celdas */
+    text-align: left;
+    font-size: 14px;
+}
+
+/* Estilo de las estadísticas (cajas informativas) */
+.statistics {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.statistics-box {
+    background-color: #2a2a2a; /* Fondo más oscuro para destacar las estadísticas */
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 28%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.statistics-box h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.statistics-box p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Estilo para botones (si los tienes en el panel) */
+.button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3; /* Color más oscuro en hover */
+}
+  </style>
+</head>
+<body>
+    <header>
+        <div style="padding: 20px; background-color: #007bff; color: white; text-align: center;">
+            <h1>Bienvenido al Panel de Administración</h1>
+        </div>
+    </header>
+
+    <div class="admin-dashboard">
+        <!-- Estadísticas de la página -->
+        <div class="statistics">
+            <div class="statistics-box">
+                <h3>Visitas Totales</h3>
+                <p id="total-visits">0</p>
+            </div>
+            <div class="statistics-box">
+                <h3>Usuarios Registrados</h3>
+                <p id="total-users">0</p>
+            </div>
+            <div class="statistics-box">
+                <h3>Ventas Totales</h3>
+                <p id="total-sales">0</p>
+            </div>
+        </div>
+
+        <!-- Ventas Realizadas -->
+        <div class="dashboard-box">
+            <h2>Ventas Realizadas</h2>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>ID Venta</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="sales-data">
+                    <!-- Aquí se cargarán las ventas dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Base de Datos de Usuarios -->
+        <div class="dashboard-box">
+            <h2>Base de Datos de Usuarios</h2>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                    </tr>
+                </thead>
+                <tbody id="user-data">
+                    <!-- Aquí se cargarán los usuarios dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo para las ventas y los usuarios
+        const salesData = [
+            { id: 1, client: 'Juan Pérez', total: '$150', date: '2024-11-01' },
+            { id: 2, client: 'Ana Gómez', total: '$200', date: '2024-11-03' },
+            { id: 3, client: 'Carlos Díaz', total: '$120', date: '2024-11-04' }
+        ];
+
+        const usersData = [
+            { id: 1, name: 'Juan Pérez', email: 'juan@example.com', role: 'admin' },
+            { id: 2, name: 'Ana Gómez', email: 'ana@example.com', role: 'cliente' },
+            { id: 3, name: 'Carlos Díaz', email: 'carlos@example.com', role: 'cliente' }
+        ];
+
+        // Función para cargar las ventas
+        function loadSalesData() {
+            const salesTable = document.getElementById('sales-data');
+            salesData.forEach(sale => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${sale.id}</td>
+                    <td>${sale.client}</td>
+                    <td>${sale.total}</td>
+                    <td>${sale.date}</td>
+                `;
+                salesTable.appendChild(row);
+            });
+            document.getElementById('total-sales').innerText = salesData.length;
+        }
+
+        // Función para cargar los usuarios
+        function loadUsersData() {
+            const userTable = document.getElementById('user-data');
+            usersData.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role}</td>
+                `;
+                userTable.appendChild(row);
+            });
+            document.getElementById('total-users').innerText = usersData.length;
+        }
+
+        // Función para cargar las estadísticas
+        function loadStatistics() {
+            const totalVisits = Math.floor(Math.random() * 1000); // Número aleatorio de visitas
+            document.getElementById('total-visits').innerText = totalVisits;
+        }
+
+        // Cargar datos en la página
+        loadSalesData();
+        loadUsersData();
+        loadStatistics();
+    </script>
+</body>
+</html>
